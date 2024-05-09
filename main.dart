@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sepatu',
+      title: 'Shoes App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -22,71 +22,100 @@ class ShoesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shoes'),
+        title: Text('SHOES'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage('https://dafunda.com/wp-content/uploads/2019/05/cara-membuat-lingkaran-pada-foto-di-powerpoint-2.png',
+              ),
+              radius: 25, 
+            ),
+          ),
+        ],
       ),
       body: ListView(
         children: [
-          ShoesItem(
-            imageUrl: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e8e3b479-7c84-4d35-bc3e-90b706bacc39/air-next-nature-se-shoes-tpPRVT.png',
-            name: 'Nike SB Zoom Blazer',
-            type: 'Mid Premium',
+          buildShoeItem(
+            
+            title: 'Nike SB Zoom Blazer',
+            subtitle: 'Mid Premium',
+            color :Color.fromRGBO(213, 78, 218, 1),
             price: '28,795',
+            imageUrl: 'https://tse4.mm.bing.net/th?id=OIP.MJ_794RrKo1WSYjgDeWwpwHaHa&pid=Api&P=0&h=220',
           ),
-          ShoesItem(
-            imageUrl: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/21783065-1c8a-4d66-8a97-117cf320e284/force-1-mid-se-easyon-shoes-B7l1nX.png',
-            name: 'Nike Air ZoomX Vaporfly',
-            type: "Men's Rood Running Shoes",
+          buildShoeItem(
+            color :Color.fromARGB(255, 96, 231, 231),
+            title: 'Nike Air Zoom Pegasus',
+            subtitle: "Men's Rood Running Shoes",
             price: '29,995',
+            imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.pmO6llG4kDElOuDtVmqf5gHaHa&pid=Api&P=0&h=220',
           ),
-          ShoesItem(
-            imageUrl: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/0083d873-114c-4a76-9dd3-82aa3c1b168f/air-max-dn-shoes-FtLNfm.png',  
-            name: 'Nike Air Force 1 S50',
-            type: "Men's Rood Running Shoes",
+          buildShoeItem(
+            color :Color.fromARGB(255, 250, 139, 181),
+            title: 'Nike ZoomX Vaporfly',
+            subtitle: "Men's Road Racing Shoe",
             price: '219,695',
+            imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.QDzN-v1OtWyP_mZOkkOa-AHaJQ&pid=Api&P=0&h=220',
           ),
-          ShoesItem(
-            imageUrl: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d90e3112-ea64-4068-be0d-1e832af89fe8/air-max-dn-shoes-FtLNfm.png',
-            name: 'Nike Air Zoom Pegasus',
-            type: "Older Kids' Shoe",
+          buildShoeItem(
+            color :const Color.fromARGB(255, 150, 161, 170),
+            title: 'Nike Air Force 1 S50',
+            subtitle: "Older Kids' Shoe",
             price: '26,295',
+            imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.G-bK-gUC0H_HJItJSOFfbgHaHa&pid=Api&P=0&h=220',
           ),
-          ShoesItem(
-            imageUrl: 'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e8e3b479-7c84-4d35-bc3e-90b706bacc39/air-force-1-07-next-nature-se-shoes-tpPRVT.png',
-            name: 'Nike Walfle One',
-            type: "Men's Shoes",
+          buildShoeItem(
+            
+            title: 'Nike Waffle One',
+            subtitle: "Men's Shoes",
+            color :Colors.yellow,
             price: '28,295',
+            imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.uEN_Ps495TUFl_S119UEBQHaE4&pid=Api&P=0&h=220',
           ),
         ],
       ),
     );
   }
-}
 
-class ShoesItem extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final String type;
-  final String price;
-
-  ShoesItem({required this.imageUrl, required this.name, required this.type, required this.price});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget buildShoeItem({
+    required Color color,
+    required String title,
+    required String subtitle,
+    required String price,
+    required String imageUrl,
+  }) {
     return Card(
-      child: ListTile(
-        leading: Image.network(
-          imageUrl,
-          width: 100,
-          height: 100,
-          fit: BoxFit.cover,
-        ),
-        title: Text(name),
-        subtitle: Text('$type - $price'),
-        trailing: IconButton(
-          icon: Icon(Icons.shopping_cart),
-          onPressed: () {
-            // Tambahkan aksi untuk menambahkan item ke keranjang belanja
-          },
+      color : color,
+      child: Padding(
+       
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align elements to the right
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 18),
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(fontSize: 14, color: Colors.black),
+                ),
+                Text(
+                  price,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(width: 16),
+            CircleAvatar(
+              backgroundImage: NetworkImage(imageUrl),
+              radius: 40, // Adjust the radius for larger image
+            ),
+          ],
         ),
       ),
     );
